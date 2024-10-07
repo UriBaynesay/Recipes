@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id            String   @id @default(uuid())
+  email         String   @unique
+  password      String
+  first_name    String
+  last_name     String
+  profile_image String?  @default("https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=")
+  facebook_link String?
+  istagram_link String?
+  x_link        String?
+  created_at    DateTime @default(now())
+
+  Recipe  Recipe[]
+  Reviews Reviews[]
+}
+
+model Recipe {
+  id          String   @id @default(uuid())
+  title       String
+  photos_url  String[]
+  description String
+  profile_id  String
+  author      Profile  @relation(fields: [profile_id], references: [id])
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  video_url   String?
+  prep_time   String
+  cook_time   String
+  servings    Int
+  ingredients String[]
+  directions  String[]
+
+  Reviews Reviews[]
+}
+
+model Reviews {
+  id         String   @id @default(uuid())
+  recipe_id  String   @unique
+  recipe     Recipe   @relation(fields: [recipe_id], references: [id], onDelete: Cascade)
+  profile_id String   @unique
+  author     Profile  @relation(fields: [profile_id], references: [id], onDelete: Cascade)
+  created_at DateTime @default(now())
+  rating     Int
+  text       String
+  image_url  String?
+  upvote     String[]
+}
