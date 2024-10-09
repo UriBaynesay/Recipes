@@ -14,15 +14,15 @@ datasource db {
 }
 
 model Profile {
-  id            String   @id @default(uuid())
-  email         String   @unique
-  first_name    String
-  last_name     String
-  profile_image String?  @default("https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=")
-  facebook_link String?
-  istagram_link String?
-  x_link        String?
-  created_at    DateTime @default(now())
+  id             String   @id @default(uuid())
+  email          String
+  first_name     String
+  last_name      String
+  facebook_link  String?
+  instagram_link String?
+  x_link         String?
+  profile_image  String @default("https://i.ibb.co/0h7yZjx/user-1.png")
+  created_at     DateTime @default(now())
 
   Recipe  Recipe[]
   Reviews Reviews[]
