@@ -7,9 +7,9 @@ export const metadata: Metadata = {
 
 const SignInPage = () => {
   return (
-    <div className="h-dvh flex justify-center items-center">
-      <SignIn signUpUrl="/sign-up"/>
-    </div>
+    <main className="flex justify-center items-center h-full">
+      <SignIn signUpUrl="/sign-up" />
+    </main>
   )
 }
 

@@ -21,9 +21,11 @@
   "dependencies": {
     "@clerk/nextjs": "^5.7.1",
     "@prisma/client": "^5.20.0",
+    "cloudinary": "^2.5.1",
     "next": "^15.0.0-rc.0",
     "prisma": "^5.20.0",
     "react": "^19.0.0-rc-1460d67c-20241003",
-    "react-dom": "^19.0.0-rc-1460d67c-20241003"
+    "react-dom": "^19.0.0-rc-1460d67c-20241003",
+    "zod": "^3.23.8"
   }
 }
