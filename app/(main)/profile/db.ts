@@ -34,7 +34,7 @@ export const createProfile = async (
         facebook_link,
         instagram_link,
         x_link,
-        profile_image,
+        profile_image
       },
     })
   } catch (error) {
