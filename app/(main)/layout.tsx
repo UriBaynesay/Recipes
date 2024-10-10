@@ -3,7 +3,7 @@ import { auth } from "@clerk/nextjs/server"
 import Link from "next/link"
 import { redirect } from "next/navigation"
 import logo from "@/app/public/logo.png"
-import { getUserProfile } from "../profile/db"
+import { getUserProfile } from "./profile/db"
 import Image from "next/image"
 
 export default async function MainLayout({
@@ -29,6 +29,7 @@ export default async function MainLayout({
             <div className="flex [&>*]:ml-4">
               <SignOutButton />
               <Link href={`/profile/${profile.id}`}>Profile</Link>
+              <Link href={`/recipe/create`}>Create Recipe</Link>
             </div>
           ) : (
             <Link href="/sign-in">Sign in</Link>

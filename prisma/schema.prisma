@@ -31,13 +31,11 @@ model Profile {
 model Recipe {
   id          String   @id @default(uuid())
   title       String
-  photos_url  String[]
   description String
   profile_id  String
   author      Profile  @relation(fields: [profile_id], references: [id])
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
-  video_url   String?
   prep_time   String
   cook_time   String
   servings    Int

@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${InterFont.className} antialiased h-dvh mt-4`}>
+        <body className={`${InterFont.className} antialiased h-dvh pt-4`}>
           {children}
         </body>
       </html>
