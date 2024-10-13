@@ -33,7 +33,7 @@ const RecipeSchema = z.object({
   directions: z.string().array(),
 })
 
-const CreateRecipeScheme = RecipeSchema.omit({
+const CreateRecipeSchema = RecipeSchema.omit({
   id: true,
   profile_id: true,
   created_at: true,
@@ -45,7 +45,7 @@ export const createRecipeAction = async (
 ): Promise<State> => {
   const user = auth()
   if (!user.userId) redirect("/sign-in")
-  const validatedInputs = CreateRecipeScheme.safeParse({
+  const validatedInputs = CreateRecipeSchema.safeParse({
     title: formData.get("title"),
     description: formData.get("description"),
     prep_time: `${formData.get("prep_time")} ${formData.get("prep_time_type")}`,

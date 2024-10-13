@@ -4,6 +4,8 @@ import Image from "next/image"
 import Link from "next/link"
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
+import CreateReview from "@/components/main/review/create-review"
+import ReviewsList from "@/components/main/review/reviews-list"
 
 export const metadata: Metadata = {
   title: "Recipe Details",
@@ -18,8 +20,8 @@ const RecipeDetailsPage = async ({
   const recipe = await getRecipeById(params.recipeId)
   if (!recipe) redirect("/")
   return (
-    <main className="grow m-4 md:m-12 mt-8 md:flex md:justify-center">
-      <article className="md:flex md:flex-col [&>*]:mb-10">
+    <main className="grow m-4 md:m-12 mt-8 md:mx-auto">
+      <article className="[&>*]:mb-10">
         <div>
           {user.userId === recipe?.profile_id && (
             <section className="[&>*]:mr-3">
@@ -64,6 +66,8 @@ const RecipeDetailsPage = async ({
           ))}
         </ol>
       </article>
+      <CreateReview recipeId={recipe.id} />
+      <ReviewsList recipeId={recipe.id} />
     </main>
   )
 }
