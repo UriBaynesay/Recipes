@@ -74,7 +74,9 @@ export const getRecipeById = async (recipeId: string) => {
   try {
     return await prisma.recipe.findFirst({
       where: { id: recipeId },
-      include: { author: true, Reviews: true },
+      include: {
+        author: true,
+      },
     })
   } catch (error) {
     console.log(error)

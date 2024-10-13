@@ -30,7 +30,12 @@ const CreateProfilePage = () => {
           <input type="url" name="x_link" id="x_link" />
 
           <label htmlFor="profile_image">Profile image</label>
-          <input type="file" name="profile_image" id="profile_image" />
+          <input
+            type="file"
+            name="profile_image"
+            id="profile_image"
+            accept="image/png, image/gif, image/jpeg"
+          />
 
           <button type="submit">Create</button>
           {state.message && (
