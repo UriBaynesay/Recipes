@@ -9,7 +9,8 @@ export const getRecipes = async (filter: string) => {
           { title: { contains: filter } },
           { description: { contains: filter } },
         ],
-      },include:{Reviews:true}
+      },
+      include: { Reviews: true },
     })
   } catch (error) {
     console.log(error)
@@ -81,6 +82,18 @@ export const deleteRecipe = async (recipeId: string) => {
   try {
     return await prisma.recipe.delete({
       where: { id: recipeId },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const getRecipesByProfileId = async (profileId: string) => {
+  const prisma = new PrismaClient()
+  try {
+    return await prisma.recipe.findMany({
+      where: { profile_id: profileId },
+      include: { Reviews: true },
     })
   } catch (error) {
     console.log(error)

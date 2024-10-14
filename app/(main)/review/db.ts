@@ -72,3 +72,16 @@ export const getReviewsByRecipeId = async (recipeId: string) => {
     return null
   }
 }
+
+export const getReviewsByProfileId = async (profileId: string) => {
+  const prisma = new PrismaClient()
+  try {
+    return await prisma.reviews.findMany({
+      where: { profile_id: profileId },
+      include: { author: true },
+    })
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}

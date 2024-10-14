@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client"
 
 import { useActionState, useEffect, useState } from "react"
 import { editRecipeAction, getRecipeByIdAction } from "../../action"
-import { Profile, Recipe, Reviews } from "prisma/prisma-client"
+import { Profile, Recipe } from "prisma/prisma-client"
 import { redirect } from "next/navigation"
 
 const EditRecipePage = ({ params }: { params: { recipeId: string } }) => {
   const [recipe, setRecipe] = useState<
-    Recipe & { author: Profile } & { Reviews: Reviews[] }
+    Recipe & { author: Profile }
   >()
   const [state, formAction] = useActionState(
     editRecipeAction.bind(null, params.recipeId),
@@ -38,7 +39,7 @@ const EditRecipePage = ({ params }: { params: { recipeId: string } }) => {
   }
 
   return (
-    <main className="grow m-4 md:m-12 mt-8">
+    <main className="grow m-4 md:m-12 mt-8 md:px-24 lg:px-60">
       <div className="md:flex md:justify-center">
         <form
           className="flex flex-col md:p-5 md:border rounded-md [&>input]:mb-4"

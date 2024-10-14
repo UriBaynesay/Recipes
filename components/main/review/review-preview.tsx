@@ -1,4 +1,3 @@
-import { deleteReviewAction } from "@/app/(main)/review/action"
 import { auth } from "@clerk/nextjs/server"
 import Image from "next/image"
 import Link from "next/link"
@@ -12,7 +11,7 @@ const ReviewPreview = ({
 }) => {
   const user = auth()
   return (
-    <>
+    <li>
       <Link href={`/profile/${review.author.id}`} className="flex items-center">
         <Image
           alt="Profile image"
@@ -48,7 +47,7 @@ const ReviewPreview = ({
           <DeleteReview profileId={review.profile_id} reviewId={review.id} />
         </div>
       )}
-    </>
+    </li>
   )
 }
 export default ReviewPreview

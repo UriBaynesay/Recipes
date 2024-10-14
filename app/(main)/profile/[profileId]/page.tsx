@@ -1,10 +1,10 @@
-import Image from "next/image"
-import { getUserProfile } from "../db"
-import Link from "next/link"
 import { Metadata } from "next"
+import ProfileRecipeList from "@/components/main/profile/profile-recipe-list"
+import ProfilePreview from "@/components/main/profile/profile-preview"
+import ProfileReviewsList from "@/components/main/profile/profile-reviews-list"
 
-export const metadata:Metadata={
-    title:"Profile Details"
+export const metadata: Metadata = {
+  title: "Profile Details",
 }
 
 const ProfileDetailsPage = async ({
@@ -13,23 +13,12 @@ const ProfileDetailsPage = async ({
   params: { profileId: string }
 }) => {
   const { profileId } = params
-  const profile = await getUserProfile(profileId)
+
   return (
-    <main className="grow m-4 md:m-12 mt-8">
-      <article className="md:flex">
-        <Image
-          alt="Profile image"
-          src={profile?.profile_image as string}
-          width={48}
-          height={48}
-          className="rounded-full aspect-square mr-4"
-        />
-        <section>
-          <h1>{`${profile?.first_name} ${profile?.last_name}`}</h1>
-          <small className="text-gray-300">{`@${profile?.email}`}</small>
-        </section>
-        <Link href={`/profile/edit/${profileId}`}>Edit</Link>
-      </article>
+    <main className="grow m-2 md:m-12 mt-8">
+      <ProfilePreview profileId={profileId} />
+      <ProfileRecipeList profileId={profileId} />
+      <ProfileReviewsList profileId={profileId}/>
     </main>
   )
 }
