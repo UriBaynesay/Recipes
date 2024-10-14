@@ -20,7 +20,7 @@ const RecipeDetailsPage = async ({
   const recipe = await getRecipeById(params.recipeId)
   if (!recipe) redirect("/")
   return (
-    <main className="grow m-4 md:m-12 mt-8 md:mx-auto">
+    <main className="grow m-4 md:m-20 mt-8 ">
       <article className="[&>*]:mb-10">
         <div>
           {user.userId === recipe?.profile_id && (
@@ -57,10 +57,16 @@ const RecipeDetailsPage = async ({
           />
         </Link>
         <p className="text-sm">{recipe?.description}</p>
-        <div className="md:grid md:grid-cols-3 md:gap-3">
-          <div>Prep Time : {recipe?.prep_time}</div>
-          <div>Cook Time : {recipe?.cook_time}</div>
-          <div>Servings : {recipe?.servings}</div>
+        <div className="md:flex md:justify-between">
+          <div className="pb-3 border-b-4 border-orange-300 ">
+            Prep Time : {recipe?.prep_time}
+          </div>
+          <div className="pb-3 border-b-4 border-orange-300 ">
+            Cook Time : {recipe?.cook_time}
+          </div>
+          <div className="pb-3 border-b-4 border-orange-300 ">
+            Servings : {recipe?.servings}
+          </div>
         </div>
 
         <ul className="list-disc">
