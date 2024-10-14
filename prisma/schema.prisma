@@ -41,6 +41,7 @@ model Recipe {
   servings    Int
   ingredients String[]
   directions  String[]
+  image_url   String
 
   Reviews Reviews[]
 }

@@ -6,7 +6,10 @@ import { createRecipeAction } from "../action"
 const CreateRecipePage = () => {
   const [ingredientsArr, setIngredientsArr] = useState([null])
   const [directionsArr, setDirectionsArr] = useState([null])
-  const [state,formAction]=useActionState(createRecipeAction,{message:null,errors:{}})
+  const [state, formAction] = useActionState(createRecipeAction, {
+    message: null,
+    errors: {},
+  })
 
   const handleAddIngredient = () => {
     setIngredientsArr([...ingredientsArr, null])
@@ -19,7 +22,10 @@ const CreateRecipePage = () => {
   return (
     <main className="grow m-4 md:m-12 mt-8">
       <div className="md:flex md:justify-center">
-        <form className="flex flex-col md:p-5 md:border rounded-md [&>input]:mb-4" action={formAction}>
+        <form
+          className="flex flex-col md:p-5 md:border rounded-md [&>input]:mb-4"
+          action={formAction}
+        >
           <label htmlFor="title">Title</label>
           <input type="text" name="title" id="title" required />
           <label htmlFor="description">Description</label>
@@ -57,7 +63,9 @@ const CreateRecipePage = () => {
               </label>
             )
           })}
-          <button type="button" onClick={handleAddIngredient}>Add Ingredient</button>
+          <button type="button" onClick={handleAddIngredient}>
+            Add Ingredient
+          </button>
 
           {directionsArr.map((direction, idx) => {
             return (
@@ -74,8 +82,15 @@ const CreateRecipePage = () => {
               </label>
             )
           })}
-          <button type="button" onClick={handleAddDirection}>Add Direction</button>
+          <button type="button" onClick={handleAddDirection}>
+            Add Direction
+          </button>
 
+          <input
+            name="image"
+            type="file"
+            accept="image/png, image/gif, image/jpeg"
+          />
           <button type="submit">Create</button>
           {state.message && (
             <small className="text-red-300">{state.message}</small>

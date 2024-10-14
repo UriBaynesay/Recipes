@@ -1,5 +1,21 @@
 import { PrismaClient } from "prisma/prisma-client"
 
+export const getRecipes = async (filter: string) => {
+  const prisma = new PrismaClient()
+  try {
+    return await prisma.recipe.findMany({
+      where: {
+        OR: [
+          { title: { contains: filter } },
+          { description: { contains: filter } },
+        ],
+      },include:{Reviews:true}
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const createRecipe = async (
   profile_id: string,
   title: string,
@@ -8,7 +24,8 @@ export const createRecipe = async (
   cook_time: string,
   servings: number,
   ingredients: string[],
-  directions: string[]
+  directions: string[],
+  image_url: string
 ) => {
   const prisma = new PrismaClient()
   try {
@@ -22,6 +39,7 @@ export const createRecipe = async (
         servings,
         ingredients,
         directions,
+        image_url,
       },
     })
   } catch (error) {

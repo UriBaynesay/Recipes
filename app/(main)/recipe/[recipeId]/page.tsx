@@ -47,20 +47,31 @@ const RecipeDetailsPage = async ({
             Updated at {recipe?.updated_at.toLocaleDateString()}
           </small>
         </div>
+        <Link href={recipe.image_url} className="block">
+          <Image
+            alt="Recipe image"
+            src={recipe.image_url}
+            height={350}
+            width={350}
+            className="aspect-square"
+          />
+        </Link>
         <p className="text-sm">{recipe?.description}</p>
         <div className="md:grid md:grid-cols-3 md:gap-3">
           <div>Prep Time : {recipe?.prep_time}</div>
           <div>Cook Time : {recipe?.cook_time}</div>
           <div>Servings : {recipe?.servings}</div>
         </div>
-        <h1 className="font-semibold text-xl">Ingredients</h1>
+
         <ul className="list-disc">
+          <h1 className="font-semibold text-xl mb-3">Ingredients</h1>
           {recipe?.ingredients.map((ingredient) => (
             <li key={ingredient}>{ingredient}</li>
           ))}
         </ul>
-        <h1 className="font-semibold text-xl">Directions</h1>
+
         <ol className="list-decimal">
+          <h1 className="font-semibold text-xl mb-3">Directions</h1>
           {recipe?.directions.map((direction) => (
             <li key={direction}>{direction}</li>
           ))}
