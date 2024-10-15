@@ -39,7 +39,7 @@ const RecipeDetailsPage = async ({
               src={recipe?.author.profile_image as string}
               height={32}
               width={32}
-              className="aspect-square"
+              className="aspect-square rounded-full mr-2"
             />
             <small>{`${recipe?.author.first_name} ${recipe?.author.last_name}`}</small>
           </Link>

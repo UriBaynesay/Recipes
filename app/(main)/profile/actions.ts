@@ -4,7 +4,7 @@ import { z } from "zod"
 import { createProfile, deleteProfile, editProfile, getUserProfile } from "./db"
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
-import { auth, clerkClient } from "@clerk/nextjs/server"
+import { auth, clerkClient, currentUser } from "@clerk/nextjs/server"
 
 const ProfileSchema = z.object({
   id: z.string(),
@@ -35,8 +35,8 @@ export const createProfileAction = async (
   state: State,
   formData: FormData
 ): Promise<State> => {
-  const user = auth()
-  if (!user.userId) redirect("/sign-in")
+  const user = await currentUser()
+  if (!user?.id) redirect("/sign-in")
   const validatedInputs = CreateProfileSchema.safeParse({
     first_name: formData.get("first_name"),
     last_name: formData.get("last_name"),
@@ -61,7 +61,7 @@ export const createProfileAction = async (
     profile_image,
   } = validatedInputs.data
 
-  let url
+  let url = user.imageUrl
   if (profile_image.size) {
     const form = new FormData()
     form.append("image", profile_image)
@@ -73,7 +73,7 @@ export const createProfileAction = async (
   }
 
   const profile = await createProfile(
-    user.userId,
+    user.id,
     first_name,
     last_name,
     email,

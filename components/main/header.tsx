@@ -11,7 +11,7 @@ const Header = async () => {
   let profile
   if (user.userId) {
     profile = await getUserProfile(user.userId)
-    if (!profile) redirect("/profile/create")
+    if (!profile) redirect("/create-profile")
   }
   return (
     <header className="flex justify-between mb-10">
