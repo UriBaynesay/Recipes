@@ -15,7 +15,7 @@ const ProfilePreview = async ({ profileId }: { profileId: string }) => {
       />
       <section>
         <h1>{`${profile?.first_name} ${profile?.last_name}`}</h1>
-        <small className="text-gray-300">{`@${profile?.email}`}</small>
+        <small className="text-gray-300">{profile?.email}</small>
       </section>
       <Link href={`/profile/edit/${profileId}`}>Edit</Link>
     </article>
