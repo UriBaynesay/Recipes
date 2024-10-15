@@ -1,9 +1,9 @@
 import RecipeList from "@/components/main/recipe-list"
 
 const HomePage =  ({ searchParams }: { searchParams: { filter?: string } }) => {
-  const query = searchParams.filter || ""
+  const filter = searchParams.filter || ""
   return <main className="grow">
-    <RecipeList query={query}/>
+    <RecipeList filter={filter}/>
   </main>
 }
 
