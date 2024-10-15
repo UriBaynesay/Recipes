@@ -6,8 +6,8 @@ export const getRecipes = async (filter: string) => {
     return await prisma.recipe.findMany({
       where: {
         OR: [
-          { title: { contains: filter } },
-          { description: { contains: filter } },
+          { title: { contains: filter, mode: "insensitive" } },
+          { description: { contains: filter, mode: "insensitive" } },
         ],
       },
       include: { Reviews: true },
