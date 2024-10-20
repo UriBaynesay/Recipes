@@ -136,8 +136,7 @@ export const editReviewAction = async (
 
 export const deleteReviewAction = async (
   reviewId: string,
-  profileId: string,
-  state: State
+  profileId: string
 ): Promise<State> => {
   const user = auth()
   if (!user.userId) redirect("/sign-in")
