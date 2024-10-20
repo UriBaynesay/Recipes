@@ -22,14 +22,16 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
     setProfile(profile)
   }
   return (
-    <main className="grow m-4 md:m-12 mt-8">
+    <main className="grow mx-4 mt-6">
+      <h1 className="text-3xl font-semibold text-center mb-4">Edit Profile</h1>
       <div className="md:flex md:justify-center">
         <form
-          className="flex flex-col md:p-5 md:border rounded-md [&>input]:mb-4"
+          className="flex flex-col md:p-12 md:border md:rounded-md md:shadow-md [&>input]:mb-5"
           action={formAction}
         >
           <label htmlFor="first_name">First name</label>
           <input
+            className="border-b-2 border-orange-300"
             type="text"
             name="first_name"
             id="first_name"
@@ -38,6 +40,7 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
           />
           <label htmlFor="last_name">Last name</label>
           <input
+            className="border-b-2 border-orange-300"
             type="text"
             name="last_name"
             id="last_name"
@@ -46,6 +49,7 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
           />
           <label htmlFor="email">Email</label>
           <input
+            className="border-b-2 border-orange-300"
             type="email"
             name="email"
             id="email"
@@ -54,6 +58,7 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
           />
           <label htmlFor="facebook_link">Facebook</label>
           <input
+            className="border-b-2 border-orange-300"
             type="url"
             name="facebook_link"
             id="facebook_link"
@@ -61,6 +66,7 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
           />
           <label htmlFor="instagram_link">Instagram</label>
           <input
+            className="border-b-2 border-orange-300"
             type="url"
             name="instagram_link"
             id="instagram_link"
@@ -68,6 +74,7 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
           />
           <label htmlFor="x_link">X</label>
           <input
+            className="border-b-2 border-orange-300"
             type="url"
             name="x_link"
             id="x_link"
@@ -77,7 +84,12 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
           <label htmlFor="profile_image">Profile image</label>
           <input type="file" name="profile_image" id="profile_image" />
 
-          <button type="submit">Edit</button>
+          <button
+            className="bg-background px-6 py-2 text-foreground rounded-md w-fit mx-auto"
+            type="submit"
+          >
+            Edit
+          </button>
 
           {state.message && (
             <small className="text-red-300">{state.message}</small>
