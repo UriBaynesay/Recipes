@@ -1,5 +1,16 @@
 import { PrismaClient } from "prisma/prisma-client"
 
+export const getProfiles = async () => {
+  const prisma = new PrismaClient()
+  try {
+    const profile = await prisma.profile.findMany()
+    if (profile) return profile
+    return null
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const getUserProfile = async (userId: string) => {
   const prisma = new PrismaClient()
   try {
@@ -34,7 +45,7 @@ export const createProfile = async (
         facebook_link,
         instagram_link,
         x_link,
-        profile_image
+        profile_image,
       },
     })
   } catch (error) {
