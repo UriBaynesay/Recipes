@@ -10,6 +10,8 @@ const InterFont = Inter({
 
 export const generateMetadata = (): Metadata => ({
   title: { template: "%s | Recipe", default: "Recipe" },
+  description:
+    "Recipes with ratings and reviews by home cooks like you. Find easy dinner ideas, healthy recipes, plus helpful cooking tips and techniques.",
 })
 
 export default function RootLayout({
