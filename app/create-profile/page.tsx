@@ -20,7 +20,9 @@ const CreateProfilePage = () => {
           className="flex flex-col md:p-12 md:border md:rounded-md md:shadow-md [&>input]:mb-5"
           action={formAction}
         >
-          <label htmlFor="first_name">First name</label>
+          <label htmlFor="first_name">
+            First name
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="text"
@@ -29,7 +31,9 @@ const CreateProfilePage = () => {
             defaultValue={user.user?.firstName?.toString()}
             required
           />
-          <label htmlFor="last_name">Last name</label>
+          <label htmlFor="last_name">
+            Last name
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="text"
@@ -38,7 +42,9 @@ const CreateProfilePage = () => {
             defaultValue={user.user?.lastName?.toString()}
             required
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            Email
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="email"
@@ -47,21 +53,27 @@ const CreateProfilePage = () => {
             defaultValue={user.user?.primaryEmailAddress?.toString()}
             required
           />
-          <label htmlFor="facebook_link">Facebook</label>
+          <label htmlFor="facebook_link">
+            Facebook
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="url"
             name="facebook_link"
             id="facebook_link"
           />
-          <label htmlFor="instagram_link">Instagram</label>
+          <label htmlFor="instagram_link">
+            Instagram
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="url"
             name="instagram_link"
             id="instagram_link"
           />
-          <label htmlFor="x_link">X</label>
+          <label htmlFor="x_link">
+            X
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="url"
@@ -69,7 +81,9 @@ const CreateProfilePage = () => {
             id="x_link"
           />
 
-          <label htmlFor="profile_image">Profile image</label>
+          <label htmlFor="profile_image">
+            Profile image
+          </label>
           <input
             type="file"
             name="profile_image"

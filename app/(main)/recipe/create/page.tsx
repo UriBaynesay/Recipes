@@ -20,40 +20,76 @@ const CreateRecipePage = () => {
   }
 
   return (
-    <main className="grow m-4 md:m-12 mt-8">
+    <main className="grow mx-4 mt-6">
+      <h1 className="text-3xl font-semibold text-center mb-4">Create Recipe</h1>
       <div className="md:flex md:justify-center">
         <form
-          className="flex flex-col md:p-5 md:border rounded-md [&>input]:mb-4"
+          className="flex flex-col md:p-12 md:border md:rounded-md md:shadow-md [&>input]:mb-4"
           action={formAction}
         >
-          <label htmlFor="title">Title</label>
-          <input type="text" name="title" id="title" required />
-          <label htmlFor="description">Description</label>
-          <textarea name="description" id="description" required />
-          <label htmlFor="prep_time" className="mb-4">
-            <div>Prep Time</div>
-            <input type="number" name="prep_time" id="prep_time" required />
+          <label htmlFor="title">
+            <h1 className="font-semibold">Title</h1>
+          </label>
+          <input
+            className="border-b-2 border-orange-300"
+            type="text"
+            name="title"
+            id="title"
+            required
+          />
+          <label htmlFor="description">
+            <h1 className="font-semibold">Description</h1>
+          </label>
+          <textarea
+            className="border-b-2 border-orange-300 focus-within:outline-none"
+            name="description"
+            id="description"
+            required
+          />
+          <label className="mb-4" htmlFor="prep_time">
+            <h1 className="font-semibold">Prep Time</h1>
+            <input
+              className="border-b-2 border-orange-300"
+              type="number"
+              name="prep_time"
+              id="prep_time"
+              required
+            />
             <select name="prep_time_type" id="prep_time_type">
               <option value="min">Min</option>
               <option value="hour">Hour</option>
             </select>
           </label>
-          <label htmlFor="cook_time" className="mb-4">
-            <div>Cook Time</div>
-            <input type="number" name="cook_time" id="cook_time" required />
+          <label className="mb-4" htmlFor="cook_time">
+            <h1 className="font-semibold">Cook Time</h1>
+            <input
+              className="border-b-2 border-orange-300"
+              type="number"
+              name="cook_time"
+              id="cook_time"
+              required
+            />
             <select name="cook_time_type" id="">
               <option value="min">Min</option>
               <option value="hour">Hour</option>
             </select>
           </label>
-          <label htmlFor="servings">Servings</label>
-          <input type="number" name="servings" id="servings" required />
+          <label htmlFor="servings">
+            <h1 className="font-semibold">Servings</h1>
+          </label>
+          <input
+            className="border-b-2 border-orange-300"
+            type="number"
+            name="servings"
+            id="servings"
+            required
+          />
           {ingredientsArr.map((ingredient, idx) => {
             return (
-              <label key={idx} htmlFor={`ingredient_${idx}`} className="mb-4">
-                <div>Ingredient</div>
+              <label className="mb-4" key={idx} htmlFor={`ingredient_${idx}`}>
+                <h1 className="font-semibold">Ingredient</h1>
                 <input
-                  className="w-full"
+                  className="border-b-2 border-orange-300 w-full"
                   type="text"
                   name={`ingredient`}
                   id={`ingredient`}
@@ -63,16 +99,20 @@ const CreateRecipePage = () => {
               </label>
             )
           })}
-          <button type="button" onClick={handleAddIngredient}>
+          <button
+            className="bg-blue-300 px-6 py-2 text-foreground rounded-md w-fit mx-auto"
+            type="button"
+            onClick={handleAddIngredient}
+          >
             Add Ingredient
           </button>
 
           {directionsArr.map((direction, idx) => {
             return (
-              <label key={idx} htmlFor={`direction_${idx}`} className="mb-4">
-                <div>Direction</div>
+              <label className="mb-4" key={idx} htmlFor={`direction_${idx}`}>
+                <h1 className="font-semibold">Direction</h1>
                 <input
-                  className="w-full"
+                  className="border-b-2 border-orange-300 w-full"
                   type="text"
                   name={`direction`}
                   id={`direction`}
@@ -82,16 +122,30 @@ const CreateRecipePage = () => {
               </label>
             )
           })}
-          <button type="button" onClick={handleAddDirection}>
+          <button
+            className="bg-blue-300 px-6 py-2 text-foreground rounded-md w-fit mx-auto"
+            type="button"
+            onClick={handleAddDirection}
+          >
             Add Direction
           </button>
 
+          <label htmlFor="image">
+            <h1 className="font-semibold">Recipe Image</h1>
+          </label>
           <input
+            className="file:bg-transparent file:p-3 file:border file:border-gray-200 file:rounded-md file:shadow-sm file:cursor-pointer file:hover:bg-gray-50"
+            id="image"
             name="image"
             type="file"
             accept="image/png, image/gif, image/jpeg"
           />
-          <button type="submit">Create</button>
+          <button
+            className="bg-background px-6 py-2 text-foreground rounded-md w-fit mx-auto"
+            type="submit"
+          >
+            Create
+          </button>
           {state.message && (
             <small className="text-red-300">{state.message}</small>
           )}

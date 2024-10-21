@@ -7,7 +7,7 @@ import { Reviews } from "prisma/prisma-client"
 const ReviewEditPage = ({ params }: { params: { reviewId: string } }) => {
   const [review, setReview] = useState<Reviews>()
   const [state, formAction] = useActionState(
-    editReviewAction.bind(null, params.reviewId,review?.profile_id as string),
+    editReviewAction.bind(null, params.reviewId, review?.profile_id as string),
     { message: null, errors: {} }
   )
   useEffect(() => {
@@ -15,7 +15,7 @@ const ReviewEditPage = ({ params }: { params: { reviewId: string } }) => {
   }, [])
 
   const fetchReview = async () => {
-    const review = await getReviewByIdAction(params.reviewId) as Reviews
+    const review = (await getReviewByIdAction(params.reviewId)) as Reviews
     setReview(review)
   }
   return (
