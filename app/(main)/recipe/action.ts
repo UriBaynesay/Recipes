@@ -31,7 +31,7 @@ const RecipeSchema = z.object({
   servings: z.number().gt(0),
   ingredients: z.string().array(),
   directions: z.string().array(),
-  image:z.any()
+  image: z.any(),
 })
 
 const CreateRecipeSchema = RecipeSchema.omit({
@@ -54,7 +54,7 @@ export const createRecipeAction = async (
     servings: Number(formData.get("servings")),
     ingredients: formData.getAll("ingredient"),
     directions: formData.getAll("direction"),
-    image:formData.get("image")
+    image: formData.get("image"),
   })
   if (!validatedInputs.success)
     return {
@@ -69,19 +69,19 @@ export const createRecipeAction = async (
     servings,
     ingredients,
     directions,
-    image
+    image,
   } = validatedInputs.data
 
-    let image_url
-    if (image.size) {
-      const form = new FormData()
-      form.append("image", image)
-      const { data } = await fetch(
-        `https://api.imgbb.com/1/upload?key=${process.env.IMG_BB_APIKEY}`,
-        { method: "post", body: form }
-      ).then((res) => res.json())
-      image_url = data.url
-    }
+  let image_url
+  if (image.size) {
+    const form = new FormData()
+    form.append("image", image)
+    const { data } = await fetch(
+      `https://api.imgbb.com/1/upload?key=${process.env.IMG_BB_APIKEY}`,
+      { method: "post", body: form }
+    ).then((res) => res.json())
+    image_url = data.url
+  }
 
   const recipe = await createRecipe(
     user.userId,

@@ -29,7 +29,9 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
           className="flex flex-col md:p-12 md:border md:rounded-md md:shadow-md [&>input]:mb-5"
           action={formAction}
         >
-          <label htmlFor="first_name">First name</label>
+          <label htmlFor="first_name">
+            First name
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="text"
@@ -38,7 +40,9 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
             required
             defaultValue={profile?.first_name}
           />
-          <label htmlFor="last_name">Last name</label>
+          <label htmlFor="last_name">
+            Last name
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="text"
@@ -47,7 +51,9 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
             required
             defaultValue={profile?.last_name}
           />
-          <label htmlFor="email">Email</label>
+          <label htmlFor="email">
+            Email
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="email"
@@ -56,7 +62,9 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
             required
             defaultValue={profile?.email}
           />
-          <label htmlFor="facebook_link">Facebook</label>
+          <label htmlFor="facebook_link">
+            Facebook
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="url"
@@ -64,7 +72,9 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
             id="facebook_link"
             defaultValue={profile?.facebook_link as string}
           />
-          <label htmlFor="instagram_link">Instagram</label>
+          <label htmlFor="instagram_link">
+            Instagram
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="url"
@@ -72,7 +82,9 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
             id="instagram_link"
             defaultValue={profile?.instagram_link as string}
           />
-          <label htmlFor="x_link">X</label>
+          <label htmlFor="x_link">
+            X
+          </label>
           <input
             className="border-b-2 border-orange-300"
             type="url"
@@ -81,8 +93,15 @@ const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
             defaultValue={profile?.x_link as string}
           />
 
-          <label htmlFor="profile_image">Profile image</label>
-          <input type="file" name="profile_image" id="profile_image" />
+          <label htmlFor="profile_image">
+            Profile image
+          </label>
+          <input
+            type="file"
+            name="profile_image"
+            id="profile_image"
+            accept="image/png, image/gif, image/jpeg"
+          />
 
           <button
             className="bg-background px-6 py-2 text-foreground rounded-md w-fit mx-auto"
