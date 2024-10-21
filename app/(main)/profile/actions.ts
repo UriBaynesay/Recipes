@@ -147,18 +147,17 @@ export const editProfileAction = async (
   redirect(`/profile/${profileId}`)
 }
 
-export const deleteProfileAction = async () => {
+export const deleteUserAction = async () => {
   const user = auth()
   if (!user.userId) redirect("/sign-in")
   try {
+    await deleteProfile(user.userId)
     await clerkClient().users.deleteUser(user.userId)
   } catch (error) {
     console.log(error)
     return redirect(`/profile/${user.userId}`)
   }
-  const isDeleted = await deleteProfile(user.userId)
-  if (!isDeleted) redirect(`/profile/${user.userId}`)
-  redirect("/")
+  revalidatePath("/")
 }
 
 export const getUserProfileAction = (profileId: string) => {
