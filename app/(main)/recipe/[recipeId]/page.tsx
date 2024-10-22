@@ -20,7 +20,7 @@ const RecipeDetailsPage = async ({
   const recipe = await getRecipeById(params.recipeId)
   if (!recipe) redirect("/")
   return (
-    <main className="grow m-4 md:m-20 mt-8 ">
+    <main className="grow m-4 md:mx-48">
       <article className="[&>*]:mb-10">
         <div>
           {user.userId === recipe?.profile_id && (
@@ -53,7 +53,7 @@ const RecipeDetailsPage = async ({
             src={recipe.image_url}
             height={350}
             width={350}
-            className="aspect-square"
+            className="aspect-square mx-auto"
           />
         </Link>
         <p className="text-sm">{recipe?.description}</p>
@@ -70,16 +70,20 @@ const RecipeDetailsPage = async ({
         </div>
 
         <ul className="list-disc">
-          <h1 className="font-semibold text-xl mb-3">Ingredients</h1>
+          <h1 className="font-bold text-4xl mb-3">Ingredients</h1>
           {recipe?.ingredients.map((ingredient) => (
-            <li key={ingredient}>{ingredient}</li>
+            <li key={ingredient} className="mb-4">
+              <p>{ingredient}</p>
+            </li>
           ))}
         </ul>
 
         <ol className="list-decimal">
-          <h1 className="font-semibold text-xl mb-3">Directions</h1>
+          <h1 className="font-bold text-4xl mb-3">Directions</h1>
           {recipe?.directions.map((direction) => (
-            <li key={direction}>{direction}</li>
+            <li key={direction} className="mb-4">
+              <p>{direction}</p>
+            </li>
           ))}
         </ol>
       </article>

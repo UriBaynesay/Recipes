@@ -9,17 +9,17 @@ const RecipePreview = ({ recipe }: { recipe: Recipe&{Reviews:Reviews[]} }) => {
     return acc+curr.rating
   },0)/recipe.Reviews.length
   return (
-    <li className="md:mb-4  w-fit rounded-t-lg">
+    <li className="md:mb-4 md:mx-auto">
       <Link href={`/recipe/${recipe.id}`}>
         <Image
           alt="Recipe image"
           src={recipe.image_url}
-          height={280}
-          width={280}
-          className="aspect-square rounded-t-lg"
+          height={250}
+          width={250}
+          className="aspect-square rounded-md"
         />
-        <div className="p-3 md:border-x-2 md:border-b-2 md:border-gray-200">
-          <h1 className="font-bold text-xl">{recipe.title}</h1>
+        <div className="p-3">
+          <h1 className="font-semibold text-xl">{recipe.title}</h1>
           <small>{`Rating : ${
             avgRating ? `${avgRating.toFixed(1)}` : "No rating"
           }`}</small>
