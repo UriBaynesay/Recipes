@@ -4,12 +4,14 @@ import Link from "next/link"
 import { Profile, Reviews } from "prisma/prisma-client"
 import DeleteReview from "./delete-review"
 
-const ReviewPreview = ({
-  review,
-}: {
-  review: Reviews & { author: Profile }
-}) => {
-  const user = auth()
+const ReviewPreview = async (
+  {
+    review,
+  }: {
+    review: Reviews & { author: Profile }
+  }
+) => {
+  const user = await auth()
   return (
     <li>
       <Link href={`/profile/${review.author.id}`} className="flex items-center">

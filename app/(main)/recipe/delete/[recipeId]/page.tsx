@@ -7,7 +7,8 @@ const DeleteRecipePage = async ({
 }: {
   params: { recipeId: string }
 }) => {
-  const recipe = await getRecipeById(params.recipeId)
+  const {recipeId} = await params
+  const recipe = await getRecipeById(recipeId)
   if (!recipe) redirect("/")
     return (
       <main className="grow m-4 md:m-12 mt-8 md:flex md:justify-center">

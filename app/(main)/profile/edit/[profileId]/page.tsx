@@ -2,10 +2,11 @@
 
 import { useActionState, useEffect, useState } from "react"
 import { editProfileAction, getUserProfileAction } from "../../actions"
-import { redirect } from "next/navigation"
+import { redirect, useParams } from "next/navigation"
 import { Profile } from "prisma/prisma-client"
 
-const EditProfilePage = ({ params }: { params: { profileId: string } }) => {
+const EditProfilePage = () => {
+  const params = useParams<{profileId:string}>()
   const [profile, setProfile] = useState<Profile | null>(null)
   const [state, formAction] = useActionState(
     editProfileAction.bind(null, params.profileId),

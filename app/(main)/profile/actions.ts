@@ -93,7 +93,7 @@ export const editProfileAction = async (
   state: State,
   formData: FormData
 ): Promise<State> => {
-  const user = auth()
+  const user = await auth()
   if (!user.userId) redirect("/sign-in")
   if (user.userId !== profileId)
     return { message: "Unauthorized to edit this user" }
@@ -148,11 +148,11 @@ export const editProfileAction = async (
 }
 
 export const deleteUserAction = async () => {
-  const user = auth()
+  const user = await auth()
   if (!user.userId) redirect("/sign-in")
   try {
     await deleteProfile(user.userId)
-    await clerkClient().users.deleteUser(user.userId)
+    await (await clerkClient()).users.deleteUser(user.userId)
   } catch (error) {
     console.log(error)
     return redirect(`/profile/${user.userId}`)
@@ -160,6 +160,6 @@ export const deleteUserAction = async () => {
   revalidatePath("/")
 }
 
-export const getUserProfileAction = (profileId: string) => {
+export const getUserProfileAction = async (profileId: string) => {
   return getUserProfile(profileId)
 }

@@ -14,10 +14,11 @@ export const metadata: Metadata = {
 const RecipeDetailsPage = async ({
   params,
 }: {
-  params: { recipeId: string }
+  params: Promise<{ recipeId: string }>
 }) => {
-  const user = auth()
-  const recipe = await getRecipeById(params.recipeId)
+  const user = await auth()
+  const {recipeId}=await params
+  const recipe = await getRecipeById(recipeId)
   if (!recipe) redirect("/")
   return (
     <main className="grow m-4 md:mx-48">

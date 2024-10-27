@@ -4,12 +4,13 @@
 import { useActionState, useEffect, useState } from "react"
 import { editRecipeAction, getRecipeByIdAction } from "../../action"
 import { Profile, Recipe } from "prisma/prisma-client"
-import { redirect } from "next/navigation"
+import { redirect, useParams } from "next/navigation"
 
-const EditRecipePage = ({ params }: { params: { recipeId: string } }) => {
+const EditRecipePage = () => {
+  const {recipeId} = useParams<{recipeId:string}>()
   const [recipe, setRecipe] = useState<Recipe & { author: Profile }>()
   const [state, formAction] = useActionState(
-    editRecipeAction.bind(null, params.recipeId),
+    editRecipeAction.bind(null, recipeId),
     {
       message: null,
       errors: {},
@@ -21,7 +22,7 @@ const EditRecipePage = ({ params }: { params: { recipeId: string } }) => {
   }, [])
 
   const fetchRecipe = async () => {
-    const recipe = await getRecipeByIdAction(params.recipeId)
+    const recipe = await getRecipeByIdAction(recipeId)
     if (!recipe) redirect("/")
     setRecipe(recipe)
   }

@@ -3,11 +3,13 @@
 import { useActionState, useEffect, useState } from "react"
 import { editReviewAction, getReviewByIdAction } from "../../action"
 import { Reviews } from "prisma/prisma-client"
+import { useParams } from "next/navigation"
 
-const ReviewEditPage = ({ params }: { params: { reviewId: string } }) => {
+const ReviewEditPage = () => {
+  const {reviewId} = useParams<{reviewId:string}>()
   const [review, setReview] = useState<Reviews>()
   const [state, formAction] = useActionState(
-    editReviewAction.bind(null, params.reviewId, review?.profile_id as string),
+    editReviewAction.bind(null, reviewId, review?.profile_id as string),
     { message: null, errors: {} }
   )
   useEffect(() => {
@@ -15,7 +17,7 @@ const ReviewEditPage = ({ params }: { params: { reviewId: string } }) => {
   }, [])
 
   const fetchReview = async () => {
-    const review = (await getReviewByIdAction(params.reviewId)) as Reviews
+    const review = (await getReviewByIdAction(reviewId)) as Reviews
     setReview(review)
   }
   return (
