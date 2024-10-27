@@ -7,7 +7,7 @@ import { redirect } from "next/navigation"
 import { SignOutButton } from "@clerk/nextjs"
 
 const Header = async () => {
-  const user = auth()
+  const user = await auth()
   let profile
   if (user.userId) {
     profile = await getUserProfile(user.userId)

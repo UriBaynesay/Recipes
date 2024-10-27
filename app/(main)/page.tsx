@@ -1,10 +1,17 @@
 import RecipeList from "@/components/main/recipe-list"
 
-const HomePage =  ({ searchParams }: { searchParams: { filter?: string } }) => {
-  const filter = searchParams.filter || ""
-  return <main className="grow">
-    <RecipeList filter={filter}/>
-  </main>
+const HomePage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ filter?: string }>
+}) => {
+  let { filter } = await searchParams
+  if (!filter) filter = ""
+  return (
+    <main className="grow">
+      <RecipeList filter={filter as string} />
+    </main>
+  )
 }
 
 export default HomePage

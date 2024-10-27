@@ -44,7 +44,7 @@ export const createRecipeAction = async (
   state: State,
   formData: FormData
 ): Promise<State> => {
-  const user = auth()
+  const user = await auth()
   if (!user.userId) redirect("/sign-in")
   const validatedInputs = CreateRecipeSchema.safeParse({
     title: formData.get("title"),
@@ -109,7 +109,7 @@ export const editRecipeAction = async (
   state: State,
   formData: FormData
 ): Promise<State> => {
-  const user = auth()
+  const user = await auth()
   if (!user.userId) redirect("/sign-in")
   const oldRecipe = await getRecipeById(recipeId)
   if (user.userId !== oldRecipe?.profile_id)
@@ -153,7 +153,7 @@ export const editRecipeAction = async (
 }
 
 export const deleteRecipeAction = async (recipeId: string) => {
-  const user = auth()
+  const user = await auth()
   if (!user.userId) redirect("/sign-in")
   const recipe = await getRecipeById(recipeId)
   if (recipe?.profile_id !== user.userId) redirect("/")

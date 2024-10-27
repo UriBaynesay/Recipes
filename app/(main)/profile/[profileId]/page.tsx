@@ -11,13 +11,14 @@ export const metadata: Metadata = {
 const ProfileDetailsPage = async ({
   params,
 }: {
-  params: { profileId: string }
+  params: Promise<{ profileId: string }>
 }) => {
+  const {profileId}= await params
   return (
     <main className="grow m-2 md:m-12 mt-8">
-      <ProfilePreview profileId={params.profileId} />
-      <ProfileRecipeList profileId={params.profileId} />
-      <ProfileReviewsList profileId={params.profileId} />
+      <ProfilePreview profileId={profileId} />
+      <ProfileRecipeList profileId={profileId} />
+      <ProfileReviewsList profileId={profileId} />
     </main>
   )
 }

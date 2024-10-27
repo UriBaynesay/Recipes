@@ -37,7 +37,7 @@ export const createReviewAction = async (
   state: State,
   formData: FormData
 ): Promise<State> => {
-  const user = auth()
+  const user = await auth()
   if (!user.userId) redirect("/sign-in")
   const validatedInputs = CreateReviewSchema.safeParse({
     recipe_id: recipeId,
@@ -87,7 +87,7 @@ export const editReviewAction = async (
   state: State,
   formData: FormData
 ): Promise<State> => {
-  const user = auth()
+  const user = await auth()
   if (!user.userId) redirect("/sign-in")
   if (user.userId !== profileId)
     return { message: "Not authorized to edit this review" }
@@ -138,7 +138,7 @@ export const deleteReviewAction = async (
   reviewId: string,
   profileId: string
 ): Promise<State> => {
-  const user = auth()
+  const user = await auth()
   if (!user.userId) redirect("/sign-in")
   if (user.userId !== profileId)
     return { message: "Not authorized to delete this review" }
