@@ -17,7 +17,7 @@ const RecipeDetailsPage = async ({
   params: Promise<{ recipeId: string }>
 }) => {
   const user = await auth()
-  const {recipeId}=await params
+  const { recipeId } = await params
   const recipe = await getRecipeById(recipeId)
   if (!recipe) redirect("/")
   return (
@@ -27,7 +27,12 @@ const RecipeDetailsPage = async ({
           {user.userId === recipe?.profile_id && (
             <section className="[&>*]:mr-3">
               <Link href={`/recipe/edit/${recipe.id}`}>Edit</Link>
-              <Link href={`/recipe/delete/${recipe.id}`}>Delete</Link>
+              <Link
+                href={`/recipe/delete/${recipe.id}`}
+                className="font-semibold text-red-500"
+              >
+                Delete
+              </Link>
             </section>
           )}
           <h1 className="font-bold text-5xl mb-3">{recipe?.title}</h1>
@@ -70,7 +75,7 @@ const RecipeDetailsPage = async ({
           </div>
         </div>
 
-        <ul className="list-disc">
+        <ul className="list-disc mx-2">
           <h1 className="font-bold text-4xl mb-3">Ingredients</h1>
           {recipe?.ingredients.map((ingredient) => (
             <li key={ingredient} className="mb-4">
@@ -79,7 +84,7 @@ const RecipeDetailsPage = async ({
           ))}
         </ul>
 
-        <ol className="list-decimal">
+        <ol className="list-decimal mx-2">
           <h1 className="font-bold text-4xl mb-3">Directions</h1>
           {recipe?.directions.map((direction) => (
             <li key={direction} className="mb-4">
@@ -88,7 +93,7 @@ const RecipeDetailsPage = async ({
           ))}
         </ol>
       </article>
-      <CreateReview recipeId={recipe.id} />
+      <CreateReview recipeId={recipe.id} title={recipe.title} />
       <ReviewsList recipeId={recipe.id} />
     </main>
   )
