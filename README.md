@@ -2,6 +2,8 @@
 
 Welcome to the Recipes App! This project is designed to help users discover, share, and manage a wide variety of recipes. Whether you're a novice cook or a seasoned chef, this app aims to inspire your culinary adventures.
 
+[Live demo](https://recipes-b5d9.onrender.com)
+
 ## Features
 
 - **Browse Recipes**: Easily explore a diverse collection of recipes categorized by cuisine, meal type, and dietary preferences.
