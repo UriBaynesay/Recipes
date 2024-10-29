@@ -16,7 +16,9 @@ const DeleteReview = ({
   )
   return (
     <form action={formAction}>
-      <button type="submit">Delete</button>
+      <button type="submit" className="font-semibold text-red-500">
+        Delete
+      </button>
       {state?.message && (
         <small className="text-red-300">{state.message}</small>
       )}
