@@ -8,7 +8,7 @@ const HomePage = async ({
   let { filter } = await searchParams
   if (!filter) filter = ""
   return (
-    <main className="grow">
+    <main className="grow mx-2">
       <RecipeList filter={filter as string} />
     </main>
   )
