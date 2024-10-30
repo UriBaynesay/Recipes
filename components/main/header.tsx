@@ -4,7 +4,8 @@ import logo from "@/app/public/logo.png"
 import { auth } from "@clerk/nextjs/server"
 import { getUserProfile } from "@/app/(main)/profile/db"
 import { redirect } from "next/navigation"
-import { SignOutButton } from "@clerk/nextjs"
+import NavBar from "./nav-bar"
+import { Profile } from "prisma/prisma-client"
 
 const Header = async () => {
   const user = await auth()
@@ -15,20 +16,11 @@ const Header = async () => {
   }
   return (
     <header className="flex justify-between mb-10">
-      <Link href="/">
-        <Image alt="Logo" src={logo} width={48} height={48} />
+      <Link href="/" className="flex">
+        <Image alt="Logo" src={logo} width={56} height={56} className="sm:hidden"/>
+        <h1 className="hidden sm:block text-5xl font-bold text-background">Recipes</h1>
       </Link>
-      <nav>
-        {profile ? (
-          <div className="flex [&>*]:ml-4">
-            <SignOutButton />
-            <Link href={`/profile/${profile.id}`}>Profile</Link>
-            <Link href={`/recipe/create`}>Create Recipe</Link>
-          </div>
-        ) : (
-          <Link href="/sign-in">Sign in</Link>
-        )}
-      </nav>
+      <NavBar profile={profile as Profile}/>
     </header>
   )
 }

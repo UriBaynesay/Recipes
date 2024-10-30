@@ -8,7 +8,7 @@ export default async function MainLayout({
 }>) {
   return (
     <>
-      <div className="flex flex-col h-full md:px-24 lg:px-60">
+      <div className="flex flex-col h-full mx-2 md:mx-24 lg:mx-60">
         <Header />
         {children}
         <Footer />

@@ -6,8 +6,8 @@ const Footer = () => {
   return (
     <footer className="py-8">
       <Link href="/">
-        <Image alt="Logo" src={logo} width={48} height={48} className="mb-8"/>
-        <h1 className="text-5xl">Recipes</h1>
+        <Image alt="Logo" src={logo} width={48} height={48} className="mb-8" />
+        <h1 className="text-5xl text-background">Recipes</h1>
       </Link>
     </footer>
   )
