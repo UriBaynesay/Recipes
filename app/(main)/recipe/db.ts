@@ -113,3 +113,14 @@ export const getRecipeById = async (recipeId: string) => {
     console.log(error)
   }
 }
+
+export const getNumberOfRecipesByProfileId = async (profileId: string) => {
+  const prisma = new PrismaClient()
+  try {
+    return await prisma.recipe.count({
+      where: { profile_id: profileId },
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
