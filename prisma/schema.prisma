@@ -15,7 +15,7 @@ datasource db {
 
 model Profile {
   id             String   @id @default(uuid())
-  email          String
+  email          String   @unique
   first_name     String
   last_name      String
   facebook_link  String?
