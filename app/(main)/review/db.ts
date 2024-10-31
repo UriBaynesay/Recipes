@@ -85,3 +85,15 @@ export const getReviewsByProfileId = async (profileId: string) => {
     return null
   }
 }
+
+export const getNumberOfReviewsByProfileId = async (profileId: string) => {
+  const prisma = new PrismaClient()
+  try {
+    return await prisma.reviews.count({
+      where: { profile_id: profileId },
+    })
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
