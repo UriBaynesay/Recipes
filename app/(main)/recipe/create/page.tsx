@@ -4,19 +4,47 @@ import { useActionState, useState } from "react"
 import { createRecipeAction } from "../action"
 
 const CreateRecipePage = () => {
-  const [ingredientsArr, setIngredientsArr] = useState([null])
-  const [directionsArr, setDirectionsArr] = useState([null])
+  const [ingredientsArr, setIngredientsArr] = useState([""])
+  const [directionsArr, setDirectionsArr] = useState([""])
   const [state, formAction] = useActionState(createRecipeAction, {
     message: null,
     errors: {},
   })
 
+  const handleChangeIngredients = ({ target }) => {
+    const updatedIngredientsArr = [...ingredientsArr]
+    updatedIngredientsArr[target.id.split("_")[1]] = target.value
+    setIngredientsArr(updatedIngredientsArr)
+  }
+
+  const handleRemoveIngredient = (ingredientToRemove: string) => {
+    if (ingredientsArr.length < 2) return
+    const updatedIngredientsArr = ingredientsArr.filter(
+      (ingredient) => ingredientToRemove !== ingredient
+    )
+    setIngredientsArr(updatedIngredientsArr)
+  }
+
+  const handleChangeDirections = ({ target }) => {
+    const updatedDirectionsArr = [...directionsArr]
+    updatedDirectionsArr[target.id.split("_")[1]] = target.value
+    setDirectionsArr(updatedDirectionsArr)
+  }
+
+  const handleRemoveDirections = (directionToRemove: string) => {
+    if (directionsArr.length < 2) return
+    const updatedDirectionsArr = directionsArr.filter(
+      (ingredient) => directionToRemove !== ingredient
+    )
+    setDirectionsArr(updatedDirectionsArr)
+  }
+
   const handleAddIngredient = () => {
-    setIngredientsArr([...ingredientsArr, null])
+    setIngredientsArr([...ingredientsArr, ""])
   }
 
   const handleAddDirection = () => {
-    setDirectionsArr([...directionsArr, null])
+    setDirectionsArr([...directionsArr, ""])
   }
 
   return (
@@ -88,14 +116,25 @@ const CreateRecipePage = () => {
             return (
               <label className="mb-4" key={idx} htmlFor={`ingredient_${idx}`}>
                 <h1 className="font-semibold">Ingredient</h1>
-                <input
-                  className="border-b-2 border-orange-300 w-full"
-                  type="text"
-                  name={`ingredient`}
-                  id={`ingredient`}
-                  placeholder="e.g. 2 cups flour, sifted"
-                  required
-                />
+                <div className="flex gap-4 items-end">
+                  <input
+                    className="border-b-2 border-orange-300 w-full"
+                    type="text"
+                    name={`ingredient`}
+                    id={`ingredient_${idx}`}
+                    placeholder="e.g. 2 cups flour, sifted"
+                    required
+                    value={ingredient}
+                    onChange={handleChangeIngredients}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveIngredient(ingredient)}
+                    className="font-semibold text-red-500 text-sm"
+                  >
+                    Remove
+                  </button>
+                </div>
               </label>
             )
           })}
@@ -111,14 +150,25 @@ const CreateRecipePage = () => {
             return (
               <label className="mb-4" key={idx} htmlFor={`direction_${idx}`}>
                 <h1 className="font-semibold">Direction</h1>
-                <input
-                  className="border-b-2 border-orange-300 w-full"
-                  type="text"
-                  name={`direction`}
-                  id={`direction`}
-                  placeholder="e.g. Combine all dry ingredients in a large bowl"
-                  required
-                />
+                <div className="flex gap-4 items-end">
+                  <input
+                    className="border-b-2 border-orange-300 w-full"
+                    type="text"
+                    name={`direction`}
+                    id={`direction_${idx}`}
+                    placeholder="e.g. Combine all dry ingredients in a large bowl"
+                    required
+                    value={direction}
+                    onChange={handleChangeDirections}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveDirections(direction)}
+                    className="font-semibold text-red-500 text-sm"
+                  >
+                    Remove
+                  </button>
+                </div>
               </label>
             )
           })}
