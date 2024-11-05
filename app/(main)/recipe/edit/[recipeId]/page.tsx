@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 "use client"
 
-import { useActionState, useEffect, useState } from "react"
+import { ChangeEvent, useActionState, useEffect, useState } from "react"
 import { editRecipeAction, getRecipeByIdAction } from "../../action"
 import { Profile, Recipe } from "prisma/prisma-client"
 import { redirect, useParams } from "next/navigation"
@@ -32,9 +32,10 @@ const EditRecipePage = () => {
     setDirectionsArr([...recipe.directions])
   }
 
-  const handleChangeIngredients = ({ target }) => {
+  const handleChangeIngredients = (ev:ChangeEvent<HTMLInputElement>) => {
+    const {target}=ev
     const updatedIngredientsArr = [...ingredientsArr]
-    updatedIngredientsArr[target.id.split("_")[1]] = target.value
+    updatedIngredientsArr[+target.id.split("_")[1]] = target.value
     setIngredientsArr(updatedIngredientsArr)
   }
 
@@ -46,9 +47,10 @@ const EditRecipePage = () => {
     setIngredientsArr(updatedIngredientsArr)
   }
 
-  const handleChangeDirections = ({ target }) => {
+  const handleChangeDirections = (ev: ChangeEvent<HTMLInputElement>) => {
+    const {target} = ev
     const updatedDirectionsArr = [...directionsArr]
-    updatedDirectionsArr[target.id.split("_")[1]] = target.value
+    updatedDirectionsArr[+target.id.split("_")[1]] = target.value
     setDirectionsArr(updatedDirectionsArr)
   }
 
