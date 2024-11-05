@@ -1,6 +1,6 @@
 "use client"
 
-import { useActionState, useState } from "react"
+import { ChangeEvent, useActionState, useState } from "react"
 import { createRecipeAction } from "../action"
 
 const CreateRecipePage = () => {
@@ -11,9 +11,10 @@ const CreateRecipePage = () => {
     errors: {},
   })
 
-  const handleChangeIngredients = ({ target }) => {
+  const handleChangeIngredients = (ev: ChangeEvent<HTMLInputElement>) => {
+    const { target } = ev
     const updatedIngredientsArr = [...ingredientsArr]
-    updatedIngredientsArr[target.id.split("_")[1]] = target.value
+    updatedIngredientsArr[+target.id.split("_")[1]] = target.value
     setIngredientsArr(updatedIngredientsArr)
   }
 
@@ -25,9 +26,10 @@ const CreateRecipePage = () => {
     setIngredientsArr(updatedIngredientsArr)
   }
 
-  const handleChangeDirections = ({ target }) => {
+  const handleChangeDirections = (ev: ChangeEvent<HTMLInputElement>) => {
+    const { target } = ev
     const updatedDirectionsArr = [...directionsArr]
-    updatedDirectionsArr[target.id.split("_")[1]] = target.value
+    updatedDirectionsArr[+target.id.split("_")[1]] = target.value
     setDirectionsArr(updatedDirectionsArr)
   }
 
