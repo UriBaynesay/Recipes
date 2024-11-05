@@ -7,8 +7,10 @@ import { Profile, Recipe } from "prisma/prisma-client"
 import { redirect, useParams } from "next/navigation"
 
 const EditRecipePage = () => {
-  const {recipeId} = useParams<{recipeId:string}>()
+  const { recipeId } = useParams<{ recipeId: string }>()
   const [recipe, setRecipe] = useState<Recipe & { author: Profile }>()
+  const [ingredientsArr, setIngredientsArr] = useState([""])
+  const [directionsArr, setDirectionsArr] = useState([""])
   const [state, formAction] = useActionState(
     editRecipeAction.bind(null, recipeId),
     {
@@ -16,8 +18,9 @@ const EditRecipePage = () => {
       errors: {},
     }
   )
+
   useEffect(() => {
-    fetchRecipe()
+    if (!recipe) fetchRecipe()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -25,6 +28,36 @@ const EditRecipePage = () => {
     const recipe = await getRecipeByIdAction(recipeId)
     if (!recipe) redirect("/")
     setRecipe(recipe)
+    setIngredientsArr([...recipe.ingredients])
+    setDirectionsArr([...recipe.directions])
+  }
+
+  const handleChangeIngredients = ({ target }) => {
+    const updatedIngredientsArr = [...ingredientsArr]
+    updatedIngredientsArr[target.id.split("_")[1]] = target.value
+    setIngredientsArr(updatedIngredientsArr)
+  }
+
+  const handleRemoveIngredient = (ingredientToRemove: string) => {
+    if (ingredientsArr.length < 2) return
+    const updatedIngredientsArr = ingredientsArr.filter(
+      (ingredient) => ingredientToRemove !== ingredient
+    )
+    setIngredientsArr(updatedIngredientsArr)
+  }
+
+  const handleChangeDirections = ({ target }) => {
+    const updatedDirectionsArr = [...directionsArr]
+    updatedDirectionsArr[target.id.split("_")[1]] = target.value
+    setDirectionsArr(updatedDirectionsArr)
+  }
+
+  const handleRemoveDirections = (directionToRemove: string) => {
+    if (directionsArr.length < 2) return
+    const updatedDirectionsArr = directionsArr.filter(
+      (ingredient) => directionToRemove !== ingredient
+    )
+    setDirectionsArr(updatedDirectionsArr)
   }
 
   const handleAddIngredient = () => {
@@ -108,23 +141,29 @@ const EditRecipePage = () => {
             defaultValue={recipe?.servings}
             required
           />
-          {recipe?.ingredients.map((ingredient, idx) => {
+          {ingredientsArr.map((ingredient, idx) => {
             return (
-              <label
-                className="mb-4"
-                key={`ingredient_${idx}`}
-                htmlFor={`ingredient_${idx}`}
-              >
+              <label className="mb-4" key={idx} htmlFor={`ingredient_${idx}`}>
                 <h1 className="font-semibold">Ingredient</h1>
-                <input
-                  className="w-full border-b-2 border-orange-300"
-                  type="text"
-                  name={`ingredient`}
-                  id={`ingredient_${idx}`}
-                  defaultValue={ingredient}
-                  placeholder="e.g. 2 cups flour, sifted"
-                  required
-                />
+                <div className="flex items-end gap-4">
+                  <input
+                    className="w-full border-b-2 border-orange-300"
+                    type="text"
+                    name={`ingredient`}
+                    id={`ingredient_${idx}`}
+                    value={ingredient}
+                    placeholder="e.g. 2 cups flour, sifted"
+                    required
+                    onChange={handleChangeIngredients}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveIngredient(ingredient)}
+                    className="font-semibold text-red-500 text-sm"
+                  >
+                    Remove
+                  </button>
+                </div>
               </label>
             )
           })}
@@ -136,19 +175,29 @@ const EditRecipePage = () => {
             Add Ingredient
           </button>
 
-          {recipe?.directions.map((direction, idx) => {
+          {directionsArr.map((direction, idx) => {
             return (
               <label className="mb-4" key={idx} htmlFor={`direction_${idx}`}>
                 <h1 className="font-semibold">Direction</h1>
-                <input
-                  className="w-full border-b-2 border-orange-300"
-                  type="text"
-                  name={`direction`}
-                  id={`direction`}
-                  defaultValue={direction}
-                  placeholder="e.g. Combine all dry ingredients in a large bowl"
-                  required
-                />
+                <div className="flex items-end gap-4">
+                  <input
+                    className="w-full border-b-2 border-orange-300"
+                    type="text"
+                    name={`direction`}
+                    id={`direction_${idx}`}
+                    value={direction}
+                    onChange={handleChangeDirections}
+                    placeholder="e.g. Combine all dry ingredients in a large bowl"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleRemoveDirections(direction)}
+                    className="font-semibold text-red-500 text-sm"
+                  >
+                    Remove
+                  </button>
+                </div>
               </label>
             )
           })}
