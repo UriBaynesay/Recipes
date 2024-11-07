@@ -107,6 +107,7 @@ export const getRecipeById = async (recipeId: string) => {
       where: { id: recipeId },
       include: {
         author: true,
+        Reviews:true
       },
     })
   } catch (error) {
