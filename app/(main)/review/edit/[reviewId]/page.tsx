@@ -31,7 +31,9 @@ const ReviewEditPage = () => {
           action={formAction}
         >
           <label htmlFor="rating">
-            <h1 className="font-semibold">My Rating</h1>
+            <h1 className="font-semibold border-b-2 border-orange-300">
+              My Rating
+            </h1>
           </label>
           <input
             id="rating"
@@ -40,10 +42,12 @@ const ReviewEditPage = () => {
             max={5}
             min={1}
             defaultValue={review?.rating}
-            className="border-b-2 border-orange-300 overflow-hidden"
+            className="overflow-hidden w-fit"
           />
           <label htmlFor="text">
-            <h1 className="font-semibold">My Review</h1>
+            <h1 className="font-semibold border-b-2 border-orange-300">
+              My Review
+            </h1>
           </label>
           <textarea
             name="text"
@@ -51,14 +55,13 @@ const ReviewEditPage = () => {
             placeholder="What did you think about this recipe? Did you make any changes or notes?"
             defaultValue={review?.text}
             required
-            className="text-sm h-32 border p-2 mb-5"
+            className="text-sm h-32 border p-2 mt-5"
           />
           <label htmlFor="image">
-            <h1 className="font-semibold text-sm">Add image</h1>
             <Image
               src={UploadImage}
               alt="Upload image"
-              className="hover:cursor-pointer"
+              className="hover:cursor-pointer mt-5"
               height={36}
               width={36}
             />
