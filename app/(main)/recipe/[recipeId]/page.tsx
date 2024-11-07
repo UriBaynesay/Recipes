@@ -21,7 +21,7 @@ const RecipeDetailsPage = async ({
   const recipe = await getRecipeById(recipeId)
   if (!recipe) redirect("/")
   return (
-    <main className="grow m-4 md:mx-48">
+    <main className="grow m-4 lg:mx-44">
       <article className="[&>*]:mb-10">
         <div>
           {user.userId === recipe?.profile_id && (
@@ -64,14 +64,17 @@ const RecipeDetailsPage = async ({
         </Link>
         <p className="text-sm">{recipe?.description}</p>
         <div className="md:flex md:justify-between">
-          <div className="pb-3 border-b-4 border-orange-300 ">
-            Prep Time : {recipe?.prep_time}
+          <div>
+            <h1 className="mb-2 border-b-4 border-orange-300">Prep Time</h1>
+            <p>{recipe?.prep_time}</p>
           </div>
-          <div className="pb-3 border-b-4 border-orange-300 ">
-            Cook Time : {recipe?.cook_time}
+          <div>
+            <h1 className="mb-2 border-b-4 border-orange-300">Cook Time</h1>
+            <p>{recipe?.cook_time}</p>
           </div>
-          <div className="pb-3 border-b-4 border-orange-300 ">
-            Servings : {recipe?.servings}
+          <div>
+            <h1 className="mb-2 border-b-4 border-orange-300">Servings</h1>
+            <p>{recipe?.servings}</p>
           </div>
         </div>
 
