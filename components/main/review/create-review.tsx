@@ -16,11 +16,14 @@ const CreateReview = ({
     { message: null, errors: {} }
   )
   return (
-    <div className="md:mx-auto p-8 border md:shadow-md md:w-96 mb-10">
-      <form className="[&>*]:mb-4 flex flex-col" action={formAction}>
+    <div className="md:mx-auto md:border-[20px] md:border-gray-100 md:w-[450px] mb-10">
+      <form
+        className="[&>*]:mb-4 flex flex-col md:shadow-md md:shadow-gray-300 p-8"
+        action={formAction}
+      >
         <h1 className="font-bold">{title}</h1>
         <label htmlFor="rating">
-          <h1 className="font-semibold text-sm">My Rating</h1>
+          <h1 className="font-bold text-sm">My Rating</h1>
         </label>
         <input
           id="rating"
@@ -29,20 +32,19 @@ const CreateReview = ({
           max={5}
           min={1}
           defaultValue={3}
-          className="overflow-hidden"
+          className="overflow-hidden w-fit"
         />
         <label htmlFor="text">
-          <h1 className="font-semibold text-sm">My Review</h1>
+          <h1 className="font-bold text-sm">My Review</h1>
         </label>
         <textarea
           name="text"
           id="text"
           placeholder="What did you think about this recipe? Did you make any changes or notes?"
           required
-          className="text-sm h-32 border p-2"
+          className="text-sm h-32 border border-black p-2"
         />
         <label htmlFor="image">
-          <h1 className="font-semibold text-sm">Add image</h1>
           <Image
             src={UploadImage}
             alt="Upload image"
