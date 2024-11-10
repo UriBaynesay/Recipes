@@ -16,6 +16,7 @@ const ReviewEditPage = () => {
   )
   useEffect(() => {
     fetchReview()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const fetchReview = async () => {
