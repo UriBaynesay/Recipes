@@ -3,7 +3,13 @@
 import { auth } from "@clerk/nextjs/server"
 import { redirect } from "next/navigation"
 import z from "zod"
-import { createReview, deleteReview, editReview, getReviewById } from "./db"
+import {
+  createReview,
+  deleteReview,
+  editReview,
+  getReviewById,
+  updateReviewUpvotes,
+} from "./db"
 
 interface State {
   message?: string | null
@@ -149,4 +155,10 @@ export const deleteReviewAction = async (
 
 export const getReviewByIdAction = async (reviewId: string) => {
   return await getReviewById(reviewId)
+}
+
+export const updateReviewUpvotesAction = async (reviewId: string) => {
+  const user = await auth()
+  if (!user) return null
+  return updateReviewUpvotes(reviewId, user.userId as string)
 }

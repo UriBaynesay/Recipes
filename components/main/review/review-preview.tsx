@@ -1,18 +1,32 @@
-import { auth } from "@clerk/nextjs/server"
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
 import { Profile, Reviews } from "prisma/prisma-client"
 import DeleteReview from "./delete-review"
+import { useAuth } from "@clerk/nextjs"
+import { updateReviewUpvotesAction } from "@/app/(main)/review/action"
+import { useState } from "react"
 import RatingStar from "@/app/public/recipe-review-star.svg"
+import Upvote from "@/app/public/upvote.svg"
 
-const ReviewPreview = async ({
+const ReviewPreview = ({
   review,
 }: {
   review: Reviews & { author: Profile }
 }) => {
-  const user = await auth()
+  const [upvotes, setUpvotes] = useState(review.upvote)
+  const user = useAuth()
+
+  const handleUpdateUpvotes = async () => {
+    const res = await updateReviewUpvotesAction(review.id)
+    if (!res) return
+    if (upvotes.includes(user.userId as string))
+      setUpvotes(upvotes.filter((userId) => userId !== user.userId))
+    else setUpvotes([...upvotes, user.userId as string])
+  }
   return (
-    <li className="border-b mx-auto">
+    <li className="border-b mx-auto mt-3">
       <Link
         href={`/profile/${review.author.id}`}
         className="flex items-center mb-3"
@@ -56,6 +70,10 @@ const ReviewPreview = async ({
             />
           </Link>
         )}
+        <button className="flex items-end gap-2" disabled={!user} onClick={handleUpdateUpvotes}>
+          <Image alt="Upvote image" src={Upvote} height={20} width={20}/>
+          <small>Helpful ({upvotes.length})</small>
+        </button>
       </div>
       {user.userId === review.profile_id && (
         <div className="mb-5">
