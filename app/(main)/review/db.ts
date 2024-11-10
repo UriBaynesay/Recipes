@@ -97,3 +97,29 @@ export const getNumberOfReviewsByProfileId = async (profileId: string) => {
     return null
   }
 }
+
+export const updateReviewUpvotes = async (reviewId: string, userId: string) => {
+  const prisma = new PrismaClient()
+  try {
+    const reviewUpvotes = await prisma.reviews.findFirst({
+      where: { id: reviewId },
+      select: { upvote: true },
+    })
+    if (reviewUpvotes?.upvote.includes(userId))
+      return await prisma.reviews.update({
+        where: { id: reviewId },
+        data: {
+          upvote: reviewUpvotes.upvote.filter(
+            (currUserId) => currUserId !== userId
+          ),
+        },
+      })
+    return await prisma.reviews.update({
+      where: { id: reviewId },
+      data: { upvote: { push: userId } },
+    })
+  } catch (error) {
+    console.log(error)
+    return null
+  }
+}
