@@ -6,11 +6,24 @@ import { editRecipeAction, getRecipeByIdAction } from "../../action"
 import { Profile, Recipe } from "prisma/prisma-client"
 import { redirect, useParams } from "next/navigation"
 
+const tags = [
+  "5 Ingredient Main Dishes",
+  "One-Pot Meals",
+  "Quick and Easy Recipes",
+  "30-Minute Meals",
+  "Soups, Stews and Chili",
+  "Comfort Food",
+  "Main Dishes",
+  "Sheet Pan Dinners",
+  "Family Dinner Ideas & Recipes",
+]
+
 const EditRecipePage = () => {
   const { recipeId } = useParams<{ recipeId: string }>()
   const [recipe, setRecipe] = useState<Recipe & { author: Profile }>()
   const [ingredientsArr, setIngredientsArr] = useState([""])
   const [directionsArr, setDirectionsArr] = useState([""])
+  const [tagsArr, setTagsArr] = useState([""])
   const [state, formAction] = useActionState(
     editRecipeAction.bind(null, recipeId),
     {
@@ -30,10 +43,11 @@ const EditRecipePage = () => {
     setRecipe(recipe)
     setIngredientsArr([...recipe.ingredients])
     setDirectionsArr([...recipe.directions])
+    setTagsArr([...recipe.tags])
   }
 
-  const handleChangeIngredients = (ev:ChangeEvent<HTMLInputElement>) => {
-    const {target}=ev
+  const handleChangeIngredients = (ev: ChangeEvent<HTMLInputElement>) => {
+    const { target } = ev
     const updatedIngredientsArr = [...ingredientsArr]
     updatedIngredientsArr[+target.id.split("_")[1]] = target.value
     setIngredientsArr(updatedIngredientsArr)
@@ -48,7 +62,7 @@ const EditRecipePage = () => {
   }
 
   const handleChangeDirections = (ev: ChangeEvent<HTMLInputElement>) => {
-    const {target} = ev
+    const { target } = ev
     const updatedDirectionsArr = [...directionsArr]
     updatedDirectionsArr[+target.id.split("_")[1]] = target.value
     setDirectionsArr(updatedDirectionsArr)
@@ -210,6 +224,30 @@ const EditRecipePage = () => {
           >
             Add Direction
           </button>
+
+          <div className="grid grid-cols-2 mt-3">
+            {tags.map((tag) => {
+              return (
+                <label key={tag}>
+                  <input
+                    type="checkbox"
+                    name="tags"
+                    className="mr-2"
+                    value={tag}
+                    checked={tagsArr.includes(tag)}
+                    onChange={(ev) => {
+                      if (!ev.target.checked)
+                        setTagsArr(
+                          tagsArr.filter((tagFromArr) => tagFromArr !== tag)
+                        )
+                      else setTagsArr([...tagsArr, tag])
+                    }}
+                  />
+                  <span>{tag}</span>
+                </label>
+              )
+            })}
+          </div>
 
           <button
             className="bg-background px-6 py-2 text-foreground rounded-md w-fit mx-auto"

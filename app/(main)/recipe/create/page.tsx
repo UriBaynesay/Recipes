@@ -3,6 +3,18 @@
 import { ChangeEvent, useActionState, useState } from "react"
 import { createRecipeAction } from "../action"
 
+const tags = [
+  "5 Ingredient Main Dishes",
+  "One-Pot Meals",
+  "Quick and Easy Recipes",
+  "30-Minute Meals",
+  "Soups, Stews and Chili",
+  "Comfort Food",
+  "Main Dishes",
+  "Sheet Pan Dinners",
+  "Family Dinner Ideas & Recipes",
+]
+
 const CreateRecipePage = () => {
   const [ingredientsArr, setIngredientsArr] = useState([""])
   const [directionsArr, setDirectionsArr] = useState([""])
@@ -182,7 +194,21 @@ const CreateRecipePage = () => {
             Add Direction
           </button>
 
-          <label htmlFor="image">
+          <div className="grid grid-cols-2 mt-3">
+            {tags.map((tag) => (
+              <label key={tag}>
+                <input
+                  type="checkbox"
+                  name="tags"
+                  value="5-Ingredient Dinner"
+                  className="mr-2"
+                />
+                <span>{tag}</span>
+              </label>
+            ))}
+          </div>
+
+          <label htmlFor="image" className="mt-3">
             <h1 className="font-semibold">Recipe Image</h1>
           </label>
           <input
