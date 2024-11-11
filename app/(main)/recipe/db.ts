@@ -26,6 +26,7 @@ export const createRecipe = async (
   servings: number,
   ingredients: string[],
   directions: string[],
+  tags: string[],
   image_url: string
 ) => {
   const prisma = new PrismaClient()
@@ -40,6 +41,7 @@ export const createRecipe = async (
         servings,
         ingredients,
         directions,
+        tags,
         image_url,
       },
     })
@@ -56,7 +58,8 @@ export const editRecipe = async (
   cook_time: string,
   servings: number,
   ingredients: string[],
-  directions: string[]
+  directions: string[],
+  tags: string[]
 ) => {
   const prisma = new PrismaClient()
   try {
@@ -70,6 +73,7 @@ export const editRecipe = async (
         servings,
         ingredients,
         directions,
+        tags,
       },
     })
   } catch (error) {
@@ -107,7 +111,7 @@ export const getRecipeById = async (recipeId: string) => {
       where: { id: recipeId },
       include: {
         author: true,
-        Reviews:true
+        Reviews: true,
       },
     })
   } catch (error) {

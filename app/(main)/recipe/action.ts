@@ -16,6 +16,7 @@ interface State {
     servings?: string[]
     ingredients?: string[]
     directions?: string[]
+    tags?: string[]
   }
 }
 
@@ -31,6 +32,7 @@ const RecipeSchema = z.object({
   servings: z.number().gt(0),
   ingredients: z.string().array(),
   directions: z.string().array(),
+  tags: z.string().array(),
   image: z.any(),
 })
 
@@ -54,6 +56,7 @@ export const createRecipeAction = async (
     servings: Number(formData.get("servings")),
     ingredients: formData.getAll("ingredient"),
     directions: formData.getAll("direction"),
+    tags: formData.getAll("tags"),
     image: formData.get("image"),
   })
   if (!validatedInputs.success)
@@ -69,6 +72,7 @@ export const createRecipeAction = async (
     servings,
     ingredients,
     directions,
+    tags,
     image,
   } = validatedInputs.data
 
@@ -92,6 +96,7 @@ export const createRecipeAction = async (
     servings,
     ingredients,
     directions,
+    tags,
     image_url
   )
   if (!recipe) return { message: "Unable to create recipe" }
@@ -122,6 +127,7 @@ export const editRecipeAction = async (
     servings: Number(formData.get("servings")),
     ingredients: formData.getAll("ingredient"),
     directions: formData.getAll("direction"),
+    tags: formData.getAll("tags"),
   })
   if (!validatedInputs.success)
     return {
@@ -136,6 +142,7 @@ export const editRecipeAction = async (
     servings,
     ingredients,
     directions,
+    tags,
   } = validatedInputs.data
 
   const recipe = await editRecipe(
@@ -146,7 +153,8 @@ export const editRecipeAction = async (
     cook_time,
     servings,
     ingredients,
-    directions
+    directions,
+    tags
   )
   if (!recipe) return { message: "Unable to edit recipe" }
   redirect(`/recipe/${recipe.id}`)
