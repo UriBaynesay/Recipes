@@ -1,14 +1,26 @@
 import { PrismaClient } from "prisma/prisma-client"
 
-export const getRecipes = async (filter: string) => {
+export const getRecipes = async (q: { filter?: string; tag?: string|string[] }) => {
   const prisma = new PrismaClient()
+  if(typeof q.tag==="string")q.tag=[q.tag]
   try {
     return await prisma.recipe.findMany({
       where: {
         OR: [
-          { title: { contains: filter, mode: "insensitive" } },
-          { description: { contains: filter, mode: "insensitive" } },
+          {
+            title: {
+              contains: q.filter || "",
+              mode: "insensitive",
+            },
+          },
+          {
+            description: {
+              contains: q.filter || "",
+              mode: "insensitive",
+            },
+          },
         ],
+        tags: { hasEvery: q.tag || [] },
       },
       include: { Reviews: true },
     })

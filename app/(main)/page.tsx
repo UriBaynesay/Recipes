@@ -3,13 +3,12 @@ import RecipeList from "@/components/main/recipe-list"
 const HomePage = async ({
   searchParams,
 }: {
-  searchParams: Promise<{ filter?: string }>
+  searchParams: Promise<{ filter?: string,tag?:string[] }>
 }) => {
-  let { filter } = await searchParams
-  if (!filter) filter = ""
+  const q = await searchParams
   return (
     <main className="grow mx-2">
-      <RecipeList filter={filter as string} />
+      <RecipeList q={q} />
     </main>
   )
 }
