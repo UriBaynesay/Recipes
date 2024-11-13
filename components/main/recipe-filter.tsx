@@ -49,21 +49,29 @@ const RecipeFilter = () => {
       <div
         className={
           (isTagsModalOpen ? "block " : "hidden ") +
-          "absolute bg-white p-4 border border-background"
+          "absolute bg-white p-5 border border-background"
         }
       >
-        {tags.map((tag) => (
-          <label key={tag} className="block mt-2">
-            <input
-              type="checkbox"
-              value={tag}
-              checked={searchParams.getAll("tag").includes(tag)}
-              onChange={() => handleTagInput(tag)}
-            />
-            <span className="ml-2 text-sm">{tag}</span>
-          </label>
-        ))}
-        <button className="mt-4 block ml-auto" onClick={() => setIsTagsModalOpen(false)}>
+        <ul className="h-[250px] overflow-y-scroll [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300">
+          {tags.map((tag) => (
+            <li key={tag} className="mr-2">
+              <label className="block mt-2">
+                <input
+                  type="checkbox"
+                  value={tag}
+                  checked={searchParams.getAll("tag").includes(tag)}
+                  onChange={() => handleTagInput(tag)}
+                />
+                <span className="ml-2 text-sm">{tag}</span>
+              </label>
+            </li>
+          ))}
+        </ul>
+
+        <button
+          className="mt-4 block ml-auto"
+          onClick={() => setIsTagsModalOpen(false)}
+        >
           <Image alt="Close tags modal" src={X} height={18} width={18} />
         </button>
       </div>
