@@ -16,7 +16,7 @@ const Header = async () => {
   }
   return (
     <header className="flex justify-between mb-10">
-      <Link href="/" className="flex">
+      <Link href="/" className="flex hover:no-underline">
         <Image alt="Logo" src={logo} width={56} height={56} className="sm:hidden"/>
         <h1 className="hidden sm:block text-5xl font-bold text-background">Recipes</h1>
       </Link>

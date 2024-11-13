@@ -10,7 +10,7 @@ const RecipePreview = ({ recipe }: { recipe: Recipe&{Reviews:Reviews[]} }) => {
   },0)/recipe.Reviews.length
   return (
     <li className="mb-4">
-      <Link href={`/recipe/${recipe.id}`} className="flex flex-col ">
+      <Link href={`/recipe/${recipe.id}`} className="flex flex-col hover:no-underline">
         <Image
           alt="Recipe image"
           src={recipe.image_url}
@@ -19,8 +19,8 @@ const RecipePreview = ({ recipe }: { recipe: Recipe&{Reviews:Reviews[]} }) => {
           className="aspect-square rounded-md self-center md:self-start"
         />
         <div className="my-3">
-          <h1 className="font-semibold text-xl">{recipe.title}</h1>
-          <small>{`Rating : ${
+          <h1 className="font-semibold text-xl hover:underline decoration-background">{recipe.title}</h1>
+          <small className="hover:no-underline">{`Rating : ${
             avgRating ? `${avgRating.toFixed(1)}` : "No rating"
           }`}</small>
         </div>

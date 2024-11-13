@@ -11,7 +11,7 @@ import { useState } from "react"
 const NavBar = ({ profile }: { profile: Profile }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   return (
-    <nav className="sm:mt-auto">
+    <nav className="sm:mt-auto text-sm">
       <Image
         className="sm:hidden"
         src={Hamburger}
@@ -32,14 +32,16 @@ const NavBar = ({ profile }: { profile: Profile }) => {
                 width={36}
                 onClick={() => setIsMenuOpen(false)}
               />
-              <SignOutButton/>
+              <SignOutButton />
               <Link
+                
                 href={`/profile/${profile.id}`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 Profile
               </Link>
               <Link
+                
                 href={`/recipe/create`}
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -48,9 +50,19 @@ const NavBar = ({ profile }: { profile: Profile }) => {
             </div>
           )}
           <div className="hidden sm:flex [&>*]:ml-4">
-            <SignOutButton/>
-            <Link href={`/profile/${profile.id}`}>Profile</Link>
-            <Link href={`/recipe/create`}>Create Recipe</Link>
+            <SignOutButton />
+            <Link
+              
+              href={`/profile/${profile.id}`}
+            >
+              Profile
+            </Link>
+            <Link
+              
+              href={`/recipe/create`}
+            >
+              Create Recipe
+            </Link>
           </div>
         </>
       ) : (
@@ -66,6 +78,7 @@ const NavBar = ({ profile }: { profile: Profile }) => {
                 onClick={() => setIsMenuOpen(false)}
               />
               <Link
+                
                 href="/sign-in"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -73,7 +86,10 @@ const NavBar = ({ profile }: { profile: Profile }) => {
               </Link>
             </div>
           )}
-          <Link className="hidden sm:block" href="/sign-in">
+          <Link
+            className="hidden sm:block"
+            href="/sign-in"
+          >
             Sign in
           </Link>
         </>

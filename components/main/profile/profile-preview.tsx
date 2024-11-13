@@ -24,12 +24,12 @@ const ProfilePreview = async ({ profileId }: { profileId: string }) => {
       <section className="mr-3">
         <h1 className="font-bold text-3xl">{`${profile?.first_name} ${profile?.last_name}`}</h1>
         <div className="flex font-semibold decoration-background">
-          <Link href={"#profile-recipes"} className="mr-2 hover:underline">
+          <Link href={"#profile-recipes"} className="mr-2">
             <small>
               <span className="text-background">{numOfRecipes}</span> Recipes
             </small>
           </Link>
-          <Link href={"#profile-reviews"} className="hover:underline">
+          <Link href={"#profile-reviews"}>
             <small>
               <span className="text-background">{numOfReviews}</span> Reviews
             </small>
