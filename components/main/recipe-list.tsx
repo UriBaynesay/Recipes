@@ -11,7 +11,7 @@ const RecipeList = async ({
   return (
     <section>
       <RecipeFilter />
-      <ul className="md:grid md:grid-cols-4 md:gap-4">
+      <ul className="mt-4 md:grid md:grid-cols-4 md:gap-4">
         {recipes?.map((recipe) => (
           <RecipePreview key={recipe.id} recipe={recipe} />
         ))}
