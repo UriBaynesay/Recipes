@@ -29,9 +29,6 @@ export const createProfile = async (
   first_name: string,
   last_name: string,
   email: string,
-  facebook_link: string,
-  instagram_link: string,
-  x_link: string,
   profile_image: string
 ) => {
   const prisma = new PrismaClient()
@@ -42,9 +39,6 @@ export const createProfile = async (
         first_name,
         last_name,
         email,
-        facebook_link,
-        instagram_link,
-        x_link,
         profile_image,
       },
     })
@@ -58,9 +52,6 @@ export const editProfile = async (
   first_name: string,
   last_name: string,
   email: string,
-  facebook_link: string,
-  instagram_link: string,
-  x_link: string,
   profile_image: string
 ) => {
   const prisma = new PrismaClient()
@@ -71,9 +62,6 @@ export const editProfile = async (
         first_name,
         last_name,
         email,
-        facebook_link,
-        instagram_link,
-        x_link,
       },
     })
     if (profile_image)
