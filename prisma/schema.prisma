@@ -18,9 +18,6 @@ model Profile {
   email          String   @unique
   first_name     String
   last_name      String
-  facebook_link  String?
-  instagram_link String?
-  x_link         String?
   profile_image  String   @default("https://i.ibb.co/0h7yZjx/user-1.png")
   created_at     DateTime @default(now())
 

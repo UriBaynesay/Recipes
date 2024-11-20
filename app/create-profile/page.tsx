@@ -50,27 +50,6 @@ const CreateProfilePage = () => {
             required
             aria-errormessage="email-err"
           />
-          <label htmlFor="facebook_link">Facebook</label>
-          <input
-            className="border-b-2 border-orange-300"
-            type="url"
-            name="facebook_link"
-            id="facebook_link"
-          />
-          <label htmlFor="instagram_link">Instagram</label>
-          <input
-            className="border-b-2 border-orange-300"
-            type="url"
-            name="instagram_link"
-            id="instagram_link"
-          />
-          <label htmlFor="x_link">X</label>
-          <input
-            className="border-b-2 border-orange-300"
-            type="url"
-            name="x_link"
-            id="x_link"
-          />
 
           <label htmlFor="profile_image">
             <h1 className="font-semibold text-sm">Add image</h1>
