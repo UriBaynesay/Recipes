@@ -13,7 +13,7 @@ const ProfilePreview = async ({ profileId }: { profileId: string }) => {
   ])
 
   return (
-    <article className="md:flex md:items-end mb-10">
+    <section className="md:flex md:items-end mb-10">
       <Image
         alt="Profile image"
         src={profile?.profile_image as string}
@@ -21,7 +21,7 @@ const ProfilePreview = async ({ profileId }: { profileId: string }) => {
         height={72}
         className="rounded-full aspect-square mr-4"
       />
-      <section className="mr-3">
+      <div className="mr-3">
         <h1 className="font-bold text-3xl">{`${profile?.first_name} ${profile?.last_name}`}</h1>
         <div className="flex font-semibold decoration-background">
           <Link href={"#profile-recipes"} className="mr-2">
@@ -37,14 +37,14 @@ const ProfilePreview = async ({ profileId }: { profileId: string }) => {
         </div>
 
         <small className="text-gray-300">{profile?.email}</small>
-      </section>
+      </div>
       <Link className="mr-2 font-semibold" href={`/profile/edit/${profileId}`}>
         Edit
       </Link>
       <form action={deleteUserAction}>
         <button className="font-semibold text-red-500">Delete</button>
       </form>
-    </article>
+    </section>
   )
 }
 
