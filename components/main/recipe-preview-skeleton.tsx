@@ -1,10 +1,10 @@
 function RecipePreviewSkeleton() {
   return (
-    <li className="mb-4">
-      <div className="h-[300px] w-[300px] rounded-md self-center md:self-start bg-gray-200"></div>
+    <li className="mb-4 bg-gray-100 rounded-md w-full">
+      <div className="h-[250px] w-full bg-gray-50"></div>
       <div className="my-3">
-        <h1 className="font-semibold text-xl hover:underline decoration-background bg-gray-200"></h1>
-        <small className="hover:no-underline bg-gray-200"></small>
+        <h1 className="h-4"></h1>
+        <small className="h-2"></small>
       </div>
     </li>
   )
